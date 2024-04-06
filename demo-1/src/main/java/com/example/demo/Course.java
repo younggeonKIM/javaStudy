@@ -12,6 +12,6 @@ public class Course {
 
 	@Id
 	private Integer cid;
-	private String cname;
+	private String name;
 	private Double price;
 }

@@ -33,7 +33,7 @@ public class ReportService {
 		for(Course course : courses	) {
 			HSSFRow datarow =sheet.createRow(dataRowIndex);
 			datarow.createCell(0).setCellValue(course.getCid());
-			datarow.createCell(1).setCellValue(course.getCname());
+			datarow.createCell(1).setCellValue(course.getName());
 			datarow.createCell(2).setCellValue(course.getPrice());
 			dataRowIndex++;
 		}
