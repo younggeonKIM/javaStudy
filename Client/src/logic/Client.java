@@ -2,6 +2,7 @@ package logic;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
@@ -18,7 +19,7 @@ public class Client {
 		BufferedWriter bufferedWriter = null;
 		
 		try {
-			socket = new Socket(host:"localhost", port:"1234");
+			socket = new Socket("localhost", 1234);
 			
 			inputStreamReader = new InputStreamReader(socket.getInputStream());
 			outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
@@ -38,8 +39,34 @@ public class Client {
 				
 				System.out.println("server: "+bufferedReader.readLine());
 				
+				if(msgToSend.equalsIgnoreCase("BYE")) {
+					break;
+				}
 			}
-			
+		
+		} catch(IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(socket != null) {
+					socket.close();
+				}
+				if(inputStreamReader != null) {
+					inputStreamReader.close();
+				}
+				if(outputStreamWriter != null) {
+					outputStreamWriter.close();
+				}
+				if(bufferedReader != null) {
+					bufferedReader.close();
+				}
+				if(bufferedWriter != null) {
+					bufferedWriter.close();
+				}
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
